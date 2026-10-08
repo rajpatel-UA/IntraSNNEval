@@ -4,7 +4,7 @@
 
 ### A Leakage-Resistant Benchmark of SNN Design Choices for Network Intrusion Detection
 
-Raj Patel, Shaswata Mitra, David Amebley, Taye Akinrele, Sayanton Dibbo, Shahram Rahimi
+Raj Patel, Shaswata Mitra, David Amebley, Taye Akinrele, Sayanton Dibbo, Sudip Mittal, Shahram Rahimi
 
 Department of Computer Science, The University of Alabama
 
@@ -328,7 +328,7 @@ CogMI 2026 proceedings version is available, please cite the arXiv version:
 ```bibtex
 @misc{patel2026spiketiming,
   title         = {The Value of Spike Timing: A Leakage-Resistant Benchmark of {SNN} Design Choices for Network Intrusion Detection},
-  author        = {Patel, Raj and Mitra, Shaswata and Amebley, David and Akinrele, Taye and Dibbo, Sayanton and Rahimi, Shahram},
+  author        = {Patel, Raj and Mitra, Shaswata and Amebley, David and Akinrele, Taye and Dibbo, Sayanton and Mittal, Sudip and Rahimi, Shahram},
   year          = {2026},
   eprint        = {2606.01442},
   archivePrefix = {arXiv},
