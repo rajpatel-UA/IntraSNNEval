@@ -1,0 +1,17 @@
+\begin{table}[t]
+\centering
+\caption{Pre-specified paired comparisons (PREREGISTRATION.md \S4), Wilcoxon signed-rank over the 20 blocks with Holm correction across the family of 2 tests. $\Delta$ is (A $-$ B) macro-F1 in percentage points; the interval is a hierarchical bootstrap resampling datasets first and seeds within datasets.}
+\label{tab:focused}
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{l l r r r l}
+\toprule
+A & B & W/L/T & median $\Delta$ & Holm $p$ & bootstrap $\Delta$ [95\% CI] \\
+\midrule
+\texttt{LeakyParallel/latency} & \texttt{LeakyParallel/rate} & 16/4/0 & +0.70 & 0.0084 & +3.79 [+0.11, +10.19] \\
+\texttt{LeakyParallel/latency} & \texttt{Leaky/latency} & 14/6/0 & +0.00 & 0.3300$^{\ast}$ & +0.16 [-0.97, +1.38] \\
+\bottomrule
+\end{tabular}}
+\vspace{2pt}
+\vspace{-2pt}
+\footnotesize $^{\ast}$ not significant at $\alpha=0.05$ after Holm. W/L/T counts blocks won, lost and \emph{exactly} tied; ties are dropped before ranking (\texttt{zero\_method=wilcox}) and so enter neither the signed-rank sum nor the effective sample size. A displayed median of $+0.00$ therefore indicates a difference smaller than the printed precision, not an exact tie.
+\end{table}

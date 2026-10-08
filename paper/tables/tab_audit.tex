@@ -1,0 +1,20 @@
+\begin{table}[t]
+\centering
+\caption{Split audit for the leakage-resistant (v2) protocols. Group overlap is the number of groups shared between partitions and must be zero wherever disjointness is claimed; a violation aborts the training job. Duplicate rows are \emph{reported}, not asserted away: KDDCup99 repeats most of its official test set inside training, which is the documented reason NSL-KDD exists. No transform is fitted on test data in any protocol. Feature dimensionality differs between the two protocol generations and each row states the confirmation figure: the screening protocol built its categorical vocabulary from the union of all splits, while the confirmation protocol fits it on training rows alone and adds one \texttt{<unk>} column per categorical field, so NSL-KDD is 122 columns under screening and 125 under confirmation.}
+\label{tab:audit}
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{l l r r r r r}
+\toprule
+Dataset & Protocol & Train & Test & Group & Overlap & Dup.\ test (\%) \\
+\midrule
+NSL-KDD & official split & 113{,}375 & 22{,}544 & - & 0 & 2.68 \\
+KDDCup99 & official split & 444{,}618 & 311{,}029 & - & 0 & 57.53 \\
+CIC-IDS2017 & within-capture order-disjoint & 1{,}981{,}517 & 566{,}152 & capture & 8 & 10.86 \\
+CIC-IDS2017 & day-disjoint (binary) & 1{,}501{,}677 & 1{,}162{,}213 & day & 0 & 4.91 \\
+CTU-13 & scenario-disjoint fold 0 & 378{,}980 & 364{,}243 & scenario & 0 & 0.00 \\
+CTU-13 & scenario-disjoint fold 1 & 532{,}279 & 210{,}944 & scenario & 0 & 0.00 \\
+CTU-13 & scenario-disjoint fold 2 & 648{,}869 & 80{,}915 & scenario & 0 & 0.00 \\
+CTU-13 & scenario-disjoint fold 3 & 598{,}193 & 145{,}030 & scenario & 0 & 0.00 \\
+\bottomrule
+\end{tabular}}
+\end{table}

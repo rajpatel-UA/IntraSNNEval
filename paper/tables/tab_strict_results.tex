@@ -1,0 +1,68 @@
+\begin{table*}[t]
+\centering
+\caption{Per-protocol results under the \textbf{strict} (v2) protocol, five seeds, mean $\pm$ across-seed standard deviation. The upper block is the encoding axis (neuron held at \texttt{LeakyParallel}); the lower block is the neuron axis (encoding held at latency). Each block varies one factor, so the table is not a joint ranking of both. Macro-F1 uses the pre-registered fixed label universe and is therefore capped at $0.80$ on CIC-IDS2017, where U2R has no test support; its absolute value is not comparable across protocols, though every comparison within a protocol is unaffected. DR and FAR are the normal-versus-attack view. SOPs are synaptic operations per sample, an operation count rather than measured energy.}
+\label{tab:strict-results}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{l l c c c c r}
+\toprule
+Protocol & Configuration & Macro-F1 & MCC & DR & FAR & SOPs/sample \\
+\midrule
+\multicolumn{7}{l}{\textit{Encoding axis --- neuron fixed at \texttt{LeakyParallel}}} \\
+\midrule
+NSL-KDD & \textbf{\texttt{LeakyParallel/latency}} & 0.5846 $\pm$ 0.0279 & 0.6585 $\pm$ 0.0272 & 0.6696 $\pm$ 0.0299 & 0.0648 $\pm$ 0.0145 & 3{,}363 \\
+ & \texttt{LeakyParallel/rate} & 0.5471 $\pm$ 0.0293 & 0.6494 $\pm$ 0.0154 & 0.6536 $\pm$ 0.0197 & 0.0527 $\pm$ 0.0217 & 32{,}502 \\
+ & \texttt{LeakyParallel/delta} & 0.5197 $\pm$ 0.0160 & 0.6417 $\pm$ 0.0148 & 0.6488 $\pm$ 0.0207 & 0.0287 $\pm$ 0.0004 & 2{,}421 \\
+KDDCup99 & \textbf{\texttt{LeakyParallel/latency}} & 0.6309 $\pm$ 0.0119 & 0.8269 $\pm$ 0.0032 & 0.9122 $\pm$ 0.0010 & 0.0130 $\pm$ 0.0049 & 2{,}843 \\
+ & \texttt{LeakyParallel/rate} & 0.6089 $\pm$ 0.0400 & 0.8266 $\pm$ 0.0033 & 0.9129 $\pm$ 0.0010 & 0.0125 $\pm$ 0.0045 & 33{,}225 \\
+ & \texttt{LeakyParallel/delta} & 0.6083 $\pm$ 0.0365 & 0.8207 $\pm$ 0.0023 & 0.9119 $\pm$ 0.0008 & 0.0076 $\pm$ 0.0003 & 1{,}920 \\
+CIC-IDS2017 & \textbf{\texttt{LeakyParallel/latency}} & 0.7842 $\pm$ 0.0030 & 0.9812 $\pm$ 0.0033 & 0.9745 $\pm$ 0.0038 & 0.0006 $\pm$ 0.0003 & 6{,}817 \\
+ & \texttt{LeakyParallel/rate} & 0.7277 $\pm$ 0.0153 & 0.9431 $\pm$ 0.0050 & 0.9264 $\pm$ 0.0076 & 0.0024 $\pm$ 0.0004 & 48{,}834 \\
+ & \texttt{LeakyParallel/delta} & 0.4981 $\pm$ 0.0087 & 0.7680 $\pm$ 0.0094 & 0.7102 $\pm$ 0.0487 & 0.0095 $\pm$ 0.0044 & 5{,}263 \\
+CTU-13 f0 & \textbf{\texttt{LeakyParallel/latency}} & 0.9985 $\pm$ 0.0013 & 0.9971 $\pm$ 0.0026 & 0.9981 $\pm$ 0.0024 & 0.0008 $\pm$ 0.0009 & 3{,}399 \\
+ & \texttt{LeakyParallel/rate} & 0.9876 $\pm$ 0.0018 & 0.9754 $\pm$ 0.0035 & 0.9804 $\pm$ 0.0033 & 0.0016 $\pm$ 0.0005 & 40{,}195 \\
+ & \texttt{LeakyParallel/delta} & 0.5938 $\pm$ 0.0048 & 0.3461 $\pm$ 0.0057 & 0.3748 $\pm$ 0.0072 & 0.0713 $\pm$ 0.0005 & 2{,}930 \\
+CTU-13 f1 & \texttt{LeakyParallel/latency} & 0.7702 $\pm$ 0.0041 & 0.6220 $\pm$ 0.0046 & 0.9968 $\pm$ 0.0025 & 0.4562 $\pm$ 0.0088 & 3{,}084 \\
+ & \texttt{LeakyParallel/rate} & 0.7750 $\pm$ 0.0050 & 0.6251 $\pm$ 0.0070 & 0.9928 $\pm$ 0.0005 & 0.4440 $\pm$ 0.0089 & 40{,}085 \\
+ & \textbf{\texttt{LeakyParallel/delta}} & 0.8825 $\pm$ 0.0067 & 0.7668 $\pm$ 0.0142 & 0.9213 $\pm$ 0.0130 & 0.1601 $\pm$ 0.0007 & 2{,}806 \\
+\midrule
+\multicolumn{7}{l}{\textit{Neuron axis --- encoding fixed at latency}} \\
+\midrule
+NSL-KDD & \textbf{\texttt{LeakyParallel}} & 0.5846 $\pm$ 0.0279 & 0.6585 $\pm$ 0.0272 & 0.6696 $\pm$ 0.0299 & 0.0648 $\pm$ 0.0145 & 3{,}363 \\
+ & \texttt{Synaptic} & 0.5678 $\pm$ 0.0198 & 0.6517 $\pm$ 0.0201 & 0.6528 $\pm$ 0.0207 & 0.0626 $\pm$ 0.0164 & 2{,}505 \\
+ & \texttt{SConv2dLSTM} & 0.5639 $\pm$ 0.0192 & 0.6406 $\pm$ 0.0161 & 0.6267 $\pm$ 0.0203 & 0.0518 $\pm$ 0.0175 & 8{,}620 \\
+ & \texttt{Leaky} & 0.5637 $\pm$ 0.0232 & 0.6482 $\pm$ 0.0205 & 0.6354 $\pm$ 0.0164 & 0.0494 $\pm$ 0.0103 & 2{,}782 \\
+ & \texttt{SLSTM} & 0.5533 $\pm$ 0.0155 & 0.6436 $\pm$ 0.0184 & 0.6181 $\pm$ 0.0221 & 0.0372 $\pm$ 0.0013 & 9{,}003 \\
+ & \texttt{RSynaptic} & 0.5281 $\pm$ 0.0306 & 0.6397 $\pm$ 0.0216 & 0.6442 $\pm$ 0.0226 & 0.0514 $\pm$ 0.0148 & 4{,}377 \\
+ & \texttt{RLeaky} & 0.4829 $\pm$ 0.0265 & 0.6048 $\pm$ 0.0194 & 0.5940 $\pm$ 0.0311 & 0.0519 $\pm$ 0.0233 & 6{,}725 \\
+ & \texttt{Lapicque} & 0.4813 $\pm$ 0.0018 & 0.6280 $\pm$ 0.0051 & 0.6029 $\pm$ 0.0051 & 0.0490 $\pm$ 0.0094 & 2{,}968 \\
+ & \texttt{Alpha} & 0.4644 $\pm$ 0.0056 & 0.6028 $\pm$ 0.0125 & 0.5922 $\pm$ 0.0073 & 0.0652 $\pm$ 0.0096 & 2{,}409 \\
+KDDCup99 & \textbf{\texttt{Leaky}} & 0.6575 $\pm$ 0.0201 & 0.8266 $\pm$ 0.0023 & 0.9113 $\pm$ 0.0012 & 0.0138 $\pm$ 0.0035 & 2{,}406 \\
+ & \texttt{Synaptic} & 0.6322 $\pm$ 0.0123 & 0.8237 $\pm$ 0.0027 & 0.9108 $\pm$ 0.0013 & 0.0163 $\pm$ 0.0006 & 2{,}000 \\
+ & \texttt{SLSTM} & 0.6314 $\pm$ 0.0120 & 0.8228 $\pm$ 0.0021 & 0.9106 $\pm$ 0.0018 & 0.0145 $\pm$ 0.0006 & 7{,}261 \\
+ & \texttt{LeakyParallel} & 0.6309 $\pm$ 0.0119 & 0.8269 $\pm$ 0.0032 & 0.9122 $\pm$ 0.0010 & 0.0130 $\pm$ 0.0049 & 2{,}843 \\
+ & \texttt{SConv2dLSTM} & 0.6072 $\pm$ 0.0284 & 0.8242 $\pm$ 0.0046 & 0.9098 $\pm$ 0.0019 & 0.0061 $\pm$ 0.0032 & 7{,}227 \\
+ & \texttt{Lapicque} & 0.5985 $\pm$ 0.0096 & 0.8252 $\pm$ 0.0032 & 0.9096 $\pm$ 0.0007 & 0.0116 $\pm$ 0.0044 & 2{,}699 \\
+ & \texttt{RSynaptic} & 0.5871 $\pm$ 0.0374 & 0.8167 $\pm$ 0.0037 & 0.9081 $\pm$ 0.0026 & 0.0113 $\pm$ 0.0030 & 5{,}004 \\
+ & \texttt{RLeaky} & 0.5597 $\pm$ 0.0438 & 0.8206 $\pm$ 0.0026 & 0.9099 $\pm$ 0.0031 & 0.0075 $\pm$ 0.0045 & 5{,}863 \\
+ & \texttt{Alpha} & 0.5434 $\pm$ 0.0086 & 0.8225 $\pm$ 0.0026 & 0.9094 $\pm$ 0.0013 & 0.0147 $\pm$ 0.0010 & 2{,}227 \\
+CTU-13 f0 & \textbf{\texttt{Synaptic}} & 0.9995 $\pm$ 0.0001 & 0.9990 $\pm$ 0.0002 & 0.9995 $\pm$ 0.0001 & 0.0005 $\pm$ 0.0003 & 3{,}408 \\
+ & \texttt{LeakyParallel} & 0.9985 $\pm$ 0.0013 & 0.9971 $\pm$ 0.0026 & 0.9981 $\pm$ 0.0024 & 0.0008 $\pm$ 0.0009 & 3{,}399 \\
+ & \texttt{Leaky} & 0.9963 $\pm$ 0.0043 & 0.9927 $\pm$ 0.0086 & 0.9941 $\pm$ 0.0072 & 0.0002 $\pm$ 0.0001 & 3{,}117 \\
+ & \texttt{Alpha} & 0.9937 $\pm$ 0.0032 & 0.9874 $\pm$ 0.0064 & 0.9899 $\pm$ 0.0055 & 0.0006 $\pm$ 0.0003 & 3{,}056 \\
+ & \texttt{RLeaky} & 0.9821 $\pm$ 0.0128 & 0.9650 $\pm$ 0.0246 & 0.9719 $\pm$ 0.0219 & 0.0026 $\pm$ 0.0028 & 4{,}076 \\
+ & \texttt{Lapicque} & 0.9815 $\pm$ 0.0110 & 0.9638 $\pm$ 0.0212 & 0.9692 $\pm$ 0.0185 & 0.0004 $\pm$ 0.0002 & 3{,}244 \\
+ & \texttt{SConv2dLSTM} & 0.9775 $\pm$ 0.0429 & 0.9585 $\pm$ 0.0779 & 0.9620 $\pm$ 0.0732 & 0.0005 $\pm$ 0.0004 & 7{,}939 \\
+ & \texttt{RSynaptic} & 0.9665 $\pm$ 0.0123 & 0.9353 $\pm$ 0.0232 & 0.9440 $\pm$ 0.0211 & 0.0007 $\pm$ 0.0006 & 4{,}284 \\
+ & \texttt{SLSTM} & 0.9028 $\pm$ 0.0325 & 0.8214 $\pm$ 0.0514 & 0.8419 $\pm$ 0.0597 & 0.0103 $\pm$ 0.0060 & 12{,}309 \\
+CTU-13 f1 & \textbf{\texttt{RSynaptic}} & 0.9114 $\pm$ 0.1090 & 0.8285 $\pm$ 0.2158 & 0.9026 $\pm$ 0.1125 & 0.0763 $\pm$ 0.1353 & 4{,}114 \\
+ & \texttt{RLeaky} & 0.8984 $\pm$ 0.0827 & 0.8151 $\pm$ 0.1337 & 0.9360 $\pm$ 0.0780 & 0.1372 $\pm$ 0.1786 & 4{,}259 \\
+ & \texttt{LeakyParallel} & 0.7702 $\pm$ 0.0041 & 0.6220 $\pm$ 0.0046 & 0.9968 $\pm$ 0.0025 & 0.4562 $\pm$ 0.0088 & 3{,}084 \\
+ & \texttt{Alpha} & 0.7608 $\pm$ 0.0037 & 0.6033 $\pm$ 0.0116 & 0.9903 $\pm$ 0.0076 & 0.4669 $\pm$ 0.0028 & 2{,}885 \\
+ & \texttt{Synaptic} & 0.6502 $\pm$ 0.2004 & 0.3581 $\pm$ 0.4108 & 0.7852 $\pm$ 0.3670 & 0.4675 $\pm$ 0.0016 & 3{,}119 \\
+ & \texttt{Lapicque} & 0.6307 $\pm$ 0.1252 & 0.2885 $\pm$ 0.2672 & 0.7272 $\pm$ 0.2443 & 0.4613 $\pm$ 0.0031 & 2{,}990 \\
+ & \texttt{SConv2dLSTM} & 0.5799 $\pm$ 0.2792 & 0.1895 $\pm$ 0.5524 & 0.5801 $\pm$ 0.4324 & 0.3921 $\pm$ 0.0855 & 7{,}493 \\
+ & \texttt{Leaky} & 0.5288 $\pm$ 0.1538 & 0.0717 $\pm$ 0.2939 & 0.5372 $\pm$ 0.2714 & 0.4602 $\pm$ 0.0023 & 2{,}878 \\
+ & \texttt{SLSTM} & 0.3161 $\pm$ 0.1373 & -0.3332 $\pm$ 0.2554 & 0.1809 $\pm$ 0.2283 & 0.4703 $\pm$ 0.0026 & 11{,}336 \\
+\bottomrule
+\end{tabular}}
+\end{table*}

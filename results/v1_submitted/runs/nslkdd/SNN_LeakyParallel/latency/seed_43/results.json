@@ -1,0 +1,372 @@
+{
+  "dataset": "nslkdd",
+  "neuron": "LeakyParallel",
+  "encoding": "latency",
+  "config": {
+    "num_steps": 25,
+    "hidden_size": 128,
+    "batch_size": 128,
+    "epochs": 10,
+    "lr": 0.001,
+    "val_fraction": 0.1,
+    "seed": 43,
+    "device": "cuda"
+  },
+  "hardware": {
+    "device": "cuda",
+    "gpu_name": "NVIDIA H200 NVL",
+    "cuda_index": 0,
+    "cuda_visible_devices": ""
+  },
+  "data": {
+    "num_features": 122,
+    "num_classes": 5,
+    "class_names": [
+      "normal",
+      "dos",
+      "probe",
+      "r2l",
+      "u2r"
+    ],
+    "class_counts_train": {
+      "normal": 60608,
+      "dos": 41334,
+      "probe": 10490,
+      "r2l": 896,
+      "u2r": 47
+    },
+    "splits": {
+      "train": 113375,
+      "val": 12598,
+      "test_plus": 22544,
+      "test_minus_21": 11850
+    }
+  },
+  "model_size": {
+    "total_parameters": 32901,
+    "trainable_parameters": 16517
+  },
+  "training": {
+    "train_time_s": 67.96210956573486,
+    "training_curve": [
+      {
+        "epoch": 1,
+        "train_loss": 0.1444706568036136,
+        "val_loss": 0.033738839411825844,
+        "val_accuracy": 0.9921416097793301
+      },
+      {
+        "epoch": 2,
+        "train_loss": 0.0280376922049608,
+        "val_loss": 0.02528363085502401,
+        "val_accuracy": 0.99428480711224
+      },
+      {
+        "epoch": 3,
+        "train_loss": 0.0225157037351867,
+        "val_loss": 0.022603848833835337,
+        "val_accuracy": 0.9950785839022067
+      },
+      {
+        "epoch": 4,
+        "train_loss": 0.019200667612677445,
+        "val_loss": 0.019160953814850536,
+        "val_accuracy": 0.9951579615812034
+      },
+      {
+        "epoch": 5,
+        "train_loss": 0.017439747928170293,
+        "val_loss": 0.025846482110809477,
+        "val_accuracy": 0.9915065883473567
+      },
+      {
+        "epoch": 6,
+        "train_loss": 0.016014252953167215,
+        "val_loss": 0.018068604017231576,
+        "val_accuracy": 0.9953167169391967
+      },
+      {
+        "epoch": 7,
+        "train_loss": 0.014254580839369162,
+        "val_loss": 0.015394131846154447,
+        "val_accuracy": 0.99547547229719
+      },
+      {
+        "epoch": 8,
+        "train_loss": 0.012925836284079643,
+        "val_loss": 0.016641363865493638,
+        "val_accuracy": 0.99547547229719
+      },
+      {
+        "epoch": 9,
+        "train_loss": 0.012192832627269974,
+        "val_loss": 0.01393830968094096,
+        "val_accuracy": 0.9961898714081601
+      },
+      {
+        "epoch": 10,
+        "train_loss": 0.011915473382964437,
+        "val_loss": 0.013467232014976837,
+        "val_accuracy": 0.9967455151611367
+      }
+    ]
+  },
+  "test_plus": {
+    "n_samples": 22544,
+    "metrics": {
+      "accuracy": 0.761444286728176,
+      "balanced_accuracy": 0.5842523736720359,
+      "f1_macro": 0.619125995808347,
+      "f1_weighted": 0.7338250897126902,
+      "precision_macro": 0.7986150813767494,
+      "recall_macro": 0.5842523736720359,
+      "matthews_corrcoef": 0.6500536153275233,
+      "cohen_kappa": 0.6254269539222223,
+      "per_class": {
+        "normal": {
+          "precision": 0.6744324083691943,
+          "recall": 0.9360518999073216,
+          "f1": 0.7839924101944887,
+          "support": 9711
+        },
+        "dos": {
+          "precision": 0.9573754789272031,
+          "recall": 0.8038873994638069,
+          "f1": 0.873943456718158,
+          "support": 7460
+        },
+        "probe": {
+          "precision": 0.7274313126907981,
+          "recall": 0.6889714993804213,
+          "f1": 0.707679253288078,
+          "support": 2421
+        },
+        "r2l": {
+          "precision": 0.80625,
+          "recall": 0.1341421143847487,
+          "f1": 0.2300148588410104,
+          "support": 2885
+        },
+        "u2r": {
+          "precision": 0.8275862068965517,
+          "recall": 0.3582089552238806,
+          "f1": 0.5,
+          "support": 67
+        }
+      },
+      "class_names": [
+        "normal",
+        "dos",
+        "probe",
+        "r2l",
+        "u2r"
+      ],
+      "roc_auc_weighted": 0.8902494027393242,
+      "confusion_matrix": [
+        [
+          9090,
+          70,
+          547,
+          2,
+          2
+        ],
+        [
+          1418,
+          5997,
+          45,
+          0,
+          0
+        ],
+        [
+          469,
+          197,
+          1668,
+          87,
+          0
+        ],
+        [
+          2462,
+          0,
+          33,
+          387,
+          3
+        ],
+        [
+          39,
+          0,
+          0,
+          4,
+          24
+        ]
+      ]
+    },
+    "binary_ids_metrics": {
+      "binary_accuracy": 0.7778122782114976,
+      "detection_rate": 0.6580690407543053,
+      "false_alarm_rate": 0.0639481000926784,
+      "binary_precision": 0.9315023163467903,
+      "binary_f1": 0.7712680944335356,
+      "tp": 8445,
+      "fp": 621,
+      "tn": 9090,
+      "fn": 4388,
+      "binary_confusion_matrix": [
+        [
+          9090,
+          621
+        ],
+        [
+          4388,
+          8445
+        ]
+      ]
+    },
+    "spike_stats": {
+      "energy_spikes_per_sample": 366.8813875088715,
+      "total_spikes": 8270974.0,
+      "spike_density": 0.11034026691996136,
+      "spike_sparsity": 0.8896597330800387,
+      "synops_per_sample": 3434.5622782114974,
+      "mean_spike_time": 7.720733642578125,
+      "ttfs_T": 25
+    },
+    "inference_time_s": 0.6459436416625977,
+    "inference_ms_per_sample": 0.028652574594685842,
+    "test_loss": 2.1413046475184165,
+    "early_exit": {
+      "accuracy": 0.7377129169623847,
+      "f1_macro": 0.6177245631440154,
+      "mean_exit_step": 8.988555713271824,
+      "max_steps": 25,
+      "uncertain_frac": 0.00532292405961675
+    }
+  },
+  "test_minus_21": {
+    "n_samples": 11850,
+    "metrics": {
+      "accuracy": 0.5467510548523207,
+      "balanced_accuracy": 0.5113519906207914,
+      "f1_macro": 0.5172500627517806,
+      "f1_weighted": 0.5530920341245132,
+      "precision_macro": 0.7071895474238953,
+      "recall_macro": 0.5113519906207914,
+      "matthews_corrcoef": 0.4522991498605872,
+      "cohen_kappa": 0.4060777214591872,
+      "per_class": {
+        "normal": {
+          "precision": 0.25953425582180223,
+          "recall": 0.7146840148698885,
+          "f1": 0.38078732359494927,
+          "support": 2152
+        },
+        "dos": {
+          "precision": 0.9151842439644219,
+          "recall": 0.6632136279926335,
+          "f1": 0.7690870261612387,
+          "support": 4344
+        },
+        "probe": {
+          "precision": 0.7273930304367004,
+          "recall": 0.686511240632806,
+          "f1": 0.7063611051617049,
+          "support": 2402
+        },
+        "r2l": {
+          "precision": 0.80625,
+          "recall": 0.1341421143847487,
+          "f1": 0.2300148588410104,
+          "support": 2885
+        },
+        "u2r": {
+          "precision": 0.8275862068965517,
+          "recall": 0.3582089552238806,
+          "f1": 0.5,
+          "support": 67
+        }
+      },
+      "class_names": [
+        "normal",
+        "dos",
+        "probe",
+        "r2l",
+        "u2r"
+      ],
+      "roc_auc_weighted": 0.8135223079894658,
+      "confusion_matrix": [
+        [
+          1538,
+          70,
+          540,
+          2,
+          2
+        ],
+        [
+          1418,
+          2881,
+          45,
+          0,
+          0
+        ],
+        [
+          469,
+          197,
+          1649,
+          87,
+          0
+        ],
+        [
+          2462,
+          0,
+          33,
+          387,
+          3
+        ],
+        [
+          39,
+          0,
+          0,
+          4,
+          24
+        ]
+      ]
+    },
+    "binary_ids_metrics": {
+      "binary_accuracy": 0.5778902953586498,
+      "detection_rate": 0.5475355743452258,
+      "false_alarm_rate": 0.2853159851301115,
+      "binary_precision": 0.8963538149898717,
+      "binary_f1": 0.6798105236205352,
+      "tp": 5310,
+      "fp": 614,
+      "tn": 1538,
+      "fn": 4388,
+      "binary_confusion_matrix": [
+        [
+          1538,
+          614
+        ],
+        [
+          4388,
+          5310
+        ]
+      ]
+    },
+    "spike_stats": {
+      "energy_spikes_per_sample": 368.41071729957804,
+      "total_spikes": 4365667.0,
+      "spike_density": 0.1108002157291964,
+      "spike_sparsity": 0.8891997842708036,
+      "synops_per_sample": 3464.2215191521623
+    },
+    "inference_time_s": 0.33991360664367676,
+    "inference_ms_per_sample": 0.02868469254377019,
+    "test_loss": 4.084799497358261,
+    "early_exit": {
+      "accuracy": 0.5043881856540084,
+      "f1_macro": 0.5051732939472707,
+      "mean_exit_step": 9.764810126582278,
+      "max_steps": 25,
+      "uncertain_frac": 0.009451476793248944
+    }
+  }
+}

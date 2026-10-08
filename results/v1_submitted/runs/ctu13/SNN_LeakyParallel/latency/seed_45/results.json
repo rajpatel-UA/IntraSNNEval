@@ -1,0 +1,191 @@
+{
+  "dataset": "ctu13",
+  "neuron": "LeakyParallel",
+  "encoding": "latency",
+  "config": {
+    "num_steps": 25,
+    "hidden_size": 128,
+    "batch_size": 128,
+    "epochs": 10,
+    "lr": 0.001,
+    "val_fraction": 0.1,
+    "seed": 45,
+    "device": "cuda"
+  },
+  "hardware": {
+    "device": "cuda",
+    "gpu_name": "NVIDIA H200 NVL",
+    "cuda_index": 0,
+    "cuda_visible_devices": ""
+  },
+  "data": {
+    "num_features": 37,
+    "num_classes": 2,
+    "class_names": [
+      "normal",
+      "botnet"
+    ],
+    "class_counts_train": {
+      "normal": 224552,
+      "botnet": 280160
+    },
+    "splits": {
+      "train": 504712,
+      "val": 56080,
+      "test_plus": 240340,
+      "test_minus_21": null
+    }
+  },
+  "model_size": {
+    "total_parameters": 21634,
+    "trainable_parameters": 5250
+  },
+  "training": {
+    "train_time_s": 662.9068632125854,
+    "training_curve": [
+      {
+        "epoch": 1,
+        "train_loss": 0.017066225072116522,
+        "val_loss": 0.0009322746965988436,
+        "val_accuracy": 0.999839514978602
+      },
+      {
+        "epoch": 2,
+        "train_loss": 0.0003698369396058648,
+        "val_loss": 0.00046251773505143445,
+        "val_accuracy": 0.9999465049928673
+      },
+      {
+        "epoch": 3,
+        "train_loss": 0.00020821701846948968,
+        "val_loss": 0.0002204642934515666,
+        "val_accuracy": 0.9999821683309558
+      },
+      {
+        "epoch": 4,
+        "train_loss": 0.00010763742411469779,
+        "val_loss": 0.00017010351122771167,
+        "val_accuracy": 0.9999643366619115
+      },
+      {
+        "epoch": 5,
+        "train_loss": 9.93117697197803e-05,
+        "val_loss": 5.883536006932256e-05,
+        "val_accuracy": 0.9999821683309558
+      },
+      {
+        "epoch": 6,
+        "train_loss": 6.10194697026973e-05,
+        "val_loss": 1.3490272538903574e-05,
+        "val_accuracy": 1.0
+      },
+      {
+        "epoch": 7,
+        "train_loss": 5.074213702183362e-05,
+        "val_loss": 5.981279480298186e-06,
+        "val_accuracy": 1.0
+      },
+      {
+        "epoch": 8,
+        "train_loss": 2.8376631050601328e-05,
+        "val_loss": 1.3775546124069506e-05,
+        "val_accuracy": 1.0
+      },
+      {
+        "epoch": 9,
+        "train_loss": 4.197511300023787e-06,
+        "val_loss": 2.6377175210092933e-06,
+        "val_accuracy": 1.0
+      },
+      {
+        "epoch": 10,
+        "train_loss": 5.123611736673229e-05,
+        "val_loss": 2.5511030364880646e-06,
+        "val_accuracy": 1.0
+      }
+    ]
+  },
+  "test_plus": {
+    "n_samples": 240340,
+    "metrics": {
+      "accuracy": 0.9999958392277607,
+      "balanced_accuracy": 0.9999962521550109,
+      "f1_macro": 0.9999957881032979,
+      "f1_weighted": 0.9999958392296914,
+      "precision_macro": 0.9999953240874957,
+      "recall_macro": 0.9999962521550109,
+      "matthews_corrcoef": 0.9999915762420759,
+      "cohen_kappa": 0.9999915762065961,
+      "per_class": {
+        "normal": {
+          "precision": 0.9999906481749914,
+          "recall": 1.0,
+          "f1": 0.9999953240656314,
+          "support": 106930
+        },
+        "botnet": {
+          "precision": 1.0,
+          "recall": 0.9999925043100217,
+          "f1": 0.9999962521409644,
+          "support": 133410
+        }
+      },
+      "class_names": [
+        "normal",
+        "botnet"
+      ],
+      "roc_auc_weighted": 0.9999999998247524,
+      "confusion_matrix": [
+        [
+          106930,
+          0
+        ],
+        [
+          1,
+          133409
+        ]
+      ]
+    },
+    "binary_ids_metrics": {
+      "binary_accuracy": 0.9999958392277607,
+      "detection_rate": 0.9999925043100217,
+      "false_alarm_rate": 0.0,
+      "binary_precision": 1.0,
+      "binary_f1": 0.9999962521409644,
+      "tp": 133409,
+      "fp": 0,
+      "tn": 106930,
+      "fn": 1,
+      "binary_confusion_matrix": [
+        [
+          106930,
+          0
+        ],
+        [
+          1,
+          133409
+        ]
+      ]
+    },
+    "spike_stats": {
+      "energy_spikes_per_sample": 339.5350503453441,
+      "total_spikes": 81603854.0,
+      "spike_density": 0.1044723231831828,
+      "spike_sparsity": 0.8955276768168172,
+      "synops_per_sample": 3658.346193576028,
+      "mean_spike_time": 10.175542831420898,
+      "ttfs_T": 25
+    },
+    "inference_time_s": 19.414568424224854,
+    "inference_ms_per_sample": 0.08077959733804133,
+    "test_loss": 2.2491272381182573e-05,
+    "early_exit": {
+      "accuracy": 0.9986893567446118,
+      "f1_macro": 0.9986730598588718,
+      "mean_exit_step": 4.5115378214196555,
+      "max_steps": 25,
+      "uncertain_frac": 0.0
+    }
+  },
+  "test_minus_21": null
+}

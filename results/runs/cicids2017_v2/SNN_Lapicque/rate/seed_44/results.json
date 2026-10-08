@@ -1,0 +1,466 @@
+{
+  "dataset": "cicids2017_v2",
+  "neuron": "Lapicque",
+  "encoding": "rate",
+  "config": {
+    "num_steps": 25,
+    "hidden_size": 128,
+    "batch_size": 128,
+    "epochs": 10,
+    "lr": 0.001,
+    "val_fraction": 0.1,
+    "seed": 44,
+    "device": "cuda"
+  },
+  "encoder_threshold": null,
+  "hardware": {
+    "device": "cuda",
+    "gpu_name": "NVIDIA H200 NVL",
+    "cuda_index": 0,
+    "cuda_visible_devices": ""
+  },
+  "provenance": {
+    "protocol": "cicids2017_v2",
+    "manifest": "cicids2017_v2.json",
+    "manifest_sha256": "bab935988330fa211286aa16361ffd0d95747ae8d7f6c158ef779921b7b9d1ac",
+    "feature_hash": "7fcfc387de8e6d246644f7af4477006df801fc6306262f99af9d161721a3301f",
+    "fold": null,
+    "n_test_expected": 566152,
+    "group_name": "capture",
+    "group_disjoint_claimed": false
+  },
+  "data": {
+    "num_features": 78,
+    "num_classes": 5,
+    "class_names": [
+      "normal",
+      "dos",
+      "probe",
+      "r2l",
+      "u2r"
+    ],
+    "class_counts_train": {
+      "normal": 1511712,
+      "dos": 346206,
+      "probe": 109857,
+      "r2l": 11530,
+      "u2r": 2212
+    },
+    "splits": {
+      "train": 1981517,
+      "val": 283074,
+      "test_plus": 566152,
+      "test_minus_21": null
+    }
+  },
+  "model_size": {
+    "total_parameters": 10757,
+    "trainable_parameters": 10757
+  },
+  "training": {
+    "train_time_s": 6283.160437345505,
+    "training_curve": [
+      {
+        "epoch": 1,
+        "train_loss": 0.07715656459586286,
+        "val_loss": 0.027900051958980737,
+        "val_accuracy": 0.9905925659014957
+      },
+      {
+        "epoch": 2,
+        "train_loss": 0.039466450517320596,
+        "val_loss": 0.022413513499183288,
+        "val_accuracy": 0.9920444830680317
+      },
+      {
+        "epoch": 3,
+        "train_loss": 0.035223064532306586,
+        "val_loss": 0.022067133034276674,
+        "val_accuracy": 0.9919102425514177
+      },
+      {
+        "epoch": 4,
+        "train_loss": 0.03305027808068177,
+        "val_loss": 0.019819530726867336,
+        "val_accuracy": 0.9933444964920833
+      },
+      {
+        "epoch": 5,
+        "train_loss": 0.031559069381908306,
+        "val_loss": 0.017070445450769967,
+        "val_accuracy": 0.9938072730098844
+      },
+      {
+        "epoch": 6,
+        "train_loss": 0.030959685445251007,
+        "val_loss": 0.01824458568598924,
+        "val_accuracy": 0.9930371563619407
+      },
+      {
+        "epoch": 7,
+        "train_loss": 0.030328227010096312,
+        "val_loss": 0.01965830953123852,
+        "val_accuracy": 0.9929029158453266
+      },
+      {
+        "epoch": 8,
+        "train_loss": 0.02970797483456369,
+        "val_loss": 0.018862173578253757,
+        "val_accuracy": 0.9938673279778433
+      },
+      {
+        "epoch": 9,
+        "train_loss": 0.02929586065530584,
+        "val_loss": 0.01408437186148296,
+        "val_accuracy": 0.9950048397238884
+      },
+      {
+        "epoch": 10,
+        "train_loss": 0.028962157501640547,
+        "val_loss": 0.013587682481652834,
+        "val_accuracy": 0.995368702176816
+      }
+    ]
+  },
+  "test_plus": {
+    "n_samples": 566152,
+    "metrics": {
+      "accuracy": 0.9920198109341661,
+      "balanced_accuracy": 0.8779796684465511,
+      "f1_macro": 0.7306067676769749,
+      "f1_weighted": 0.9918872275995085,
+      "precision_macro": 0.7696693392740324,
+      "recall_macro": 0.7023837347572408,
+      "matthews_corrcoef": 0.9425732593759937,
+      "cohen_kappa": 0.9424072147513448,
+      "per_class": {
+        "normal": {
+          "precision": 0.9944064222418466,
+          "recall": 0.9971753838519748,
+          "f1": 0.9957889781577661,
+          "support": 523965
+        },
+        "dos": {
+          "precision": 0.9190283400809717,
+          "recall": 0.877143764556426,
+          "f1": 0.8975977033285486,
+          "support": 18892
+        },
+        "probe": {
+          "precision": 0.9999072915218097,
+          "recall": 0.9925002300542928,
+          "f1": 0.9961899923799847,
+          "support": 21734
+        },
+        "r2l": {
+          "precision": 0.9350046425255338,
+          "recall": 0.6450992953235106,
+          "f1": 0.7634571645185747,
+          "support": 1561
+        },
+        "u2r": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 0
+        }
+      },
+      "class_names": [
+        "normal",
+        "dos",
+        "probe",
+        "r2l",
+        "u2r"
+      ],
+      "roc_auc_weighted": 0.995724571494797,
+      "confusion_matrix": [
+        [
+          522485,
+          1363,
+          2,
+          70,
+          45
+        ],
+        [
+          2321,
+          16571,
+          0,
+          0,
+          0
+        ],
+        [
+          67,
+          94,
+          21571,
+          0,
+          2
+        ],
+        [
+          551,
+          3,
+          0,
+          1007,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "per_group": {
+        "group_name": "capture",
+        "groups": {
+          "Friday-WorkingHours-Afternoon-DDos.pcap_ISCX.csv": {
+            "n": 45149,
+            "macro_f1": 0.49731146580406876,
+            "mcc": 0.9885558140156049,
+            "DR": 0.9937494497755084,
+            "FAR": 0.003669724770642202,
+            "binary_confusion_matrix": [
+              [
+                33666,
+                124
+              ],
+              [
+                71,
+                11288
+              ]
+            ],
+            "support_normal": 33790,
+            "support_attack": 11359,
+            "pred_normal": 33737,
+            "pred_attack": 11412,
+            "pred_attack_frac": 0.25276307337925535
+          },
+          "Friday-WorkingHours-Afternoon-PortScan.pcap_ISCX.csv": {
+            "n": 57294,
+            "macro_f1": 0.3988365571267384,
+            "mcc": 0.9910730326941177,
+            "DR": 0.9969172724763045,
+            "FAR": 0.0022215973003374577,
+            "binary_confusion_matrix": [
+              [
+                35481,
+                79
+              ],
+              [
+                67,
+                21667
+              ]
+            ],
+            "support_normal": 35560,
+            "support_attack": 21734,
+            "pred_normal": 35548,
+            "pred_attack": 21746,
+            "pred_attack_frac": 0.37955108737389603
+          },
+          "Friday-WorkingHours-Morning.pcap_ISCX.csv": {
+            "n": 38207,
+            "macro_f1": 0.25822112512545464,
+            "mcc": 0.03634541404108914,
+            "DR": 0.026954177897574125,
+            "FAR": 0.003779469288508299,
+            "binary_confusion_matrix": [
+              [
+                37693,
+                143
+              ],
+              [
+                361,
+                10
+              ]
+            ],
+            "support_normal": 37836,
+            "support_attack": 371,
+            "pred_normal": 38054,
+            "pred_attack": 153,
+            "pred_attack_frac": 0.004004501792865182
+          },
+          "Monday-WorkingHours.pcap_ISCX.csv": {
+            "n": 105984,
+            "macro_f1": 0.33259416514183676,
+            "mcc": null,
+            "DR": 0.0,
+            "FAR": 0.004425196256038647,
+            "binary_confusion_matrix": [
+              [
+                105515,
+                469
+              ],
+              [
+                0,
+                0
+              ]
+            ],
+            "support_normal": 105984,
+            "support_attack": 0,
+            "pred_normal": 105515,
+            "pred_attack": 469,
+            "pred_attack_frac": 0.004425196256038647
+          },
+          "Thursday-WorkingHours-Afternoon-Infilteration.pcap_ISCX.csv": {
+            "n": 57721,
+            "macro_f1": 0.24949874577948286,
+            "mcc": null,
+            "DR": 0.0,
+            "FAR": 0.004002009667192183,
+            "binary_confusion_matrix": [
+              [
+                57490,
+                231
+              ],
+              [
+                0,
+                0
+              ]
+            ],
+            "support_normal": 57721,
+            "support_attack": 0,
+            "pred_normal": 57490,
+            "pred_attack": 231,
+            "pred_attack_frac": 0.004002009667192183
+          },
+          "Thursday-WorkingHours-Morning-WebAttacks.pcap_ISCX.csv": {
+            "n": 34074,
+            "macro_f1": 0.2496693996297276,
+            "mcc": null,
+            "DR": 0.0,
+            "FAR": 0.002641310089804543,
+            "binary_confusion_matrix": [
+              [
+                33984,
+                90
+              ],
+              [
+                0,
+                0
+              ]
+            ],
+            "support_normal": 34074,
+            "support_attack": 0,
+            "pred_normal": 33984,
+            "pred_attack": 90,
+            "pred_attack_frac": 0.002641310089804543
+          },
+          "Tuesday-WorkingHours.pcap_ISCX.csv": {
+            "n": 89182,
+            "macro_f1": 0.4450329015832369,
+            "mcc": 0.7544924497290034,
+            "DR": 0.6516129032258065,
+            "FAR": 0.0015177104254153733,
+            "binary_confusion_matrix": [
+              [
+                87499,
+                133
+              ],
+              [
+                540,
+                1010
+              ]
+            ],
+            "support_normal": 87632,
+            "support_attack": 1550,
+            "pred_normal": 88039,
+            "pred_attack": 1143,
+            "pred_attack_frac": 0.01281648763203337
+          },
+          "Wednesday-workingHours.pcap_ISCX.csv": {
+            "n": 138541,
+            "macro_f1": 0.365296823782095,
+            "mcc": 0.8335667233237097,
+            "DR": 0.7351178028718807,
+            "FAR": 0.0016061750197917302,
+            "binary_confusion_matrix": [
+              [
+                131157,
+                211
+              ],
+              [
+                1900,
+                5273
+              ]
+            ],
+            "support_normal": 131368,
+            "support_attack": 7173,
+            "pred_normal": 133057,
+            "pred_attack": 5484,
+            "pred_attack_frac": 0.03958394987765355
+          }
+        }
+      },
+      "duplicate_free": {
+        "n_excluded": 61493,
+        "pct_excluded": 10.861570744252427,
+        "metrics": {
+          "n": 504659,
+          "macro_f1": 0.7581476881979512,
+          "mcc": 0.927544604360013,
+          "DR": 0.9141066474879277,
+          "FAR": 0.002889833003827872,
+          "binary_confusion_matrix": [
+            [
+              474086,
+              1374
+            ],
+            [
+              2508,
+              26691
+            ]
+          ],
+          "support_normal": 475460,
+          "support_attack": 29199,
+          "pred_normal": 476594,
+          "pred_attack": 28065,
+          "pred_attack_frac": 0.055611809162226376
+        },
+        "delta_macro_f1_pp": 2.754092052097634,
+        "delta_FAR_pp": 0.006521685580271764
+      }
+    },
+    "binary_ids_metrics": {
+      "binary_accuracy": 0.9921946756348119,
+      "detection_rate": 0.930333989143575,
+      "false_alarm_rate": 0.0028246161480251545,
+      "binary_precision": 0.963661363189943,
+      "binary_f1": 0.9467044563709823,
+      "tp": 39248,
+      "fp": 1480,
+      "tn": 522485,
+      "fn": 2939,
+      "binary_confusion_matrix": [
+        [
+          522485,
+          1480
+        ],
+        [
+          2939,
+          39248
+        ]
+      ]
+    },
+    "spike_stats": {
+      "energy_spikes_per_sample": 423.22590399751306,
+      "total_spikes": 239610192.0,
+      "spike_density": 0.12728598616466558,
+      "spike_sparsity": 0.8727140138353344
+    },
+    "inference_time_s": 151.52757811546326,
+    "inference_ms_per_sample": 0.2676446927953328,
+    "test_loss": 0.03459996016383951,
+    "spike_accounting": {
+      "input_spikes_per_sample": 369.2054289307465,
+      "hidden_spikes_per_sample": 398.8126280574828,
+      "output_spikes_per_sample": 24.41327594003024,
+      "total_spikes_per_sample": 792.4313329282595,
+      "sops_per_sample": 49252.358043422966,
+      "fanout_input": 128,
+      "fanout_hidden": 5,
+      "gated_cell": false,
+      "sop_definition": "input_spikes*fanout_input + hidden_spikes*fanout_hidden; output-layer spikes are the readout and drive no downstream synapses"
+    }
+  },
+  "test_minus_21": null
+}

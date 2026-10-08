@@ -1,0 +1,17 @@
+\begin{table}[t]
+\centering
+\caption{Protocol audit motivating the leakage-resistant (v2) evaluation. Each row is an issue we tested for in the original protocol, what the test found, and how v2 treats it. The union-split vocabulary turned out to be empirically negligible; we report its size rather than citing that as grounds for keeping it.}
+\label{tab:protocol-audit}
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{l p{3.4cm} l p{3.6cm}}
+\toprule
+Dataset & Issue audited & Finding & Revised treatment \\
+\midrule
+NSL-KDD & Exact train/test duplicate records & 2.68\% of test rows & Duplicate-free sensitivity reported \\
+KDDCup99 & Exact train/test duplicate records & 57.53\% of test rows & Duplicate-free sensitivity; ranking unchanged \\
+CIC-IDS2017 & Random split interleaves flows of one attack burst & Present in the legacy protocol & Within-capture order-disjoint; day-disjoint transfer test \\
+CTU-13 & Host aggregates computed over whole scenario; random split & $100.00\rightarrow92.01$ macro-F1 & Causal aggregates + scenario-disjoint folds \\
+all & Categorical vocabulary fitted on train$\cup$test & 0 NSL-KDD / 2 KDDCup99 test rows affected & All learned transforms fitted on train only \\
+\bottomrule
+\end{tabular}}
+\end{table}
