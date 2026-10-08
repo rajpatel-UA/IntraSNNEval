@@ -301,18 +301,19 @@ def fig_timing() -> str:
         # Annotate with the two macro-F1 values the difference is taken between,
         # so the bar cannot be read without its operands.
         txt = f"{r.f1_timing:.3f} / {r.f1_notiming:.3f}"
-        off, ha = (1.6, "left") if v > 0 else (-1.6, "right")
-        ax.text(v + off, i, txt, va="center", ha=ha, fontsize=FS_ANNOT,
-                color=TEXT)
+        # Every label sits right of the zero line (or of a positive bar's end).
+        # Running a negative bar's label leftward put it into the tick labels.
+        ax.text(max(v, 0) + 1.6, i, txt, va="center", ha="left",
+                fontsize=FS_ANNOT, color=TEXT)
 
     ax.set_yticks(y)
     ax.set_yticklabels([PROTO_LABEL[p] for p in d.index], fontsize=7)
     ax.set_xlabel("value of spike timing (pp macro-F1)")
-    # Asymmetric padding: the annotations run outward from the bar end, so the
-    # negative side needs room for a label AND must not reach the tick labels.
+    # Asymmetric padding: room on the left for the negative bars only, and on
+    # the right for the labels that run outward from the longest bar.
     lo, hi = d.timing_premium_pp.min(), d.timing_premium_pp.max()
     rng = hi - lo
-    ax.set_xlim(lo - 0.60 * rng, hi + 0.30 * rng)
+    ax.set_xlim(min(lo, 0) - 0.12 * rng, hi + 0.48 * rng)
     ax.grid(axis="y", visible=False)
     ax.grid(axis="x", color=GRID, lw=0.5)
     save(fig, "fig_timing")
@@ -363,8 +364,10 @@ def fig_sparsity_cascade() -> str:
                label=name, color=style[name]["c"], hatch=style[name]["h"],
                zorder=3, edgecolor=TEXT, linewidth=0.5)
     ax.axhline(1.0, color=ZERO, lw=1.0, ls="--", zorder=4)
-    ax.text(len(protos) - 0.42, 1.04, "parity", fontsize=FS_ANNOT, color=TEXT,
-            ha="right", va="bottom")
+    # Just outside the right spine, level with the line: every bar crosses 1x,
+    # so any position inside the axes put the label on top of a bar.
+    ax.text(1.01, 1.0, "parity", transform=ax.get_yaxis_transform(),
+            fontsize=FS_ANNOT, color=TEXT, ha="left", va="center")
     ax.set_yscale("log")
     ax.set_ylabel("rate / latency")
     ax.set_xticks(x)

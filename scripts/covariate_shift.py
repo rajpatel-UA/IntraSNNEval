@@ -124,7 +124,9 @@ def plot(summary: pd.DataFrame, path: Path) -> None:
     matplotlib.rcParams.update(RC)
     s = summary.dropna(subset=["timing_premium_pp"])
     fig, ax = plt.subplots(figsize=(COL_W, 2.75), layout="constrained")
-    ax.axhline(0, color=ZERO, lw=1.0, ls="--", zorder=1)
+    # Above the grid (zorder 1.5): drawn below it, the grid line at zero ran
+    # through the middle of the dashes and made the line look doubled.
+    ax.axhline(0, color=ZERO, lw=1.0, ls="--", zorder=2)
     # One colour: the points are protocols, not encodings, so the three-hue
     # mapping does not apply here.
     ax.scatter(s.w_p90, s.timing_premium_pp, s=MS_ORDINARY, color=LATENCY,
@@ -133,12 +135,20 @@ def plot(summary: pd.DataFrame, path: Path) -> None:
     # by 0.008 and their timing premiums by 1.2 pp on an axis spanning 64. A
     # single offset for every point puts one label through the other, so the
     # two are pushed apart vertically and the rest keep the default.
-    nudge = {"nslkdd": (4, 5), "kddcup99": (4, -9)}
+    nudge = {"nslkdd": (4, 5), "kddcup99": (4, -9), "ctu13_f1": (-4, 3)}
+    # Points are labelled with the protocol names the paper uses elsewhere;
+    # the `label` column keeps the short identifiers.
+    display = {"nslkdd": "NSL-KDD", "kddcup99": "KDDCup99",
+               "cicids2017": "CIC-IDS2017", "ctu13_f0": "CTU-13 f0",
+               "ctu13_f1": "CTU-13 f1", "ctu13_f2": "CTU-13 f2",
+               "ctu13_f3": "CTU-13 f3"}
     for _, r in s.iterrows():
-        ax.annotate(r.label, (r.w_p90, r.timing_premium_pp),
-                    fontsize=FS_ANNOT, color=TEXT,
-                    xytext=nudge.get(r.label, (4, 3)),
-                    textcoords="offset points")
+        dx, dy = nudge.get(r.label, (4, 3))
+        ax.annotate(display.get(r.label, r.label),
+                    (r.w_p90, r.timing_premium_pp),
+                    fontsize=FS_ANNOT, color=TEXT, xytext=(dx, dy),
+                    textcoords="offset points",
+                    ha="right" if dx < 0 else "left")
     ax.set_xlabel("train-test shift: 90th pct. Wasserstein")
     ax.set_ylabel("value of timing (pp macro-F1)")
     # Deliberately no fitted line: five points cannot support one.
