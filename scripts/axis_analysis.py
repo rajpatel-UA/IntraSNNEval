@@ -123,9 +123,13 @@ def main() -> int:
                 .reset_index())
     per_ds.to_csv(out / "per_dataset.csv", index=False)
 
-    # Mean rank *within this axis only*.
-    wide = df.pivot_table(index=["protocol", "seed"], columns="level",
-                          values=PRIMARY, aggfunc="mean")
+    # Mean rank *within this axis only*, over the axis's registered protocols.
+    # Runs on other protocols stay in the descriptive table above but never
+    # enter the ranking: once the full sweep added all nine neurons on
+    # CIC-IDS2017, an unfiltered ranking silently grew from 20 to 25 blocks.
+    wide = df[df.protocol.isin(EXPECTED[args.axis])].pivot_table(
+        index=["protocol", "seed"], columns="level", values=PRIMARY,
+        aggfunc="mean")
     complete = wide.dropna()
     ranks = pd.DataFrame(
         np.apply_along_axis(lambda r: rankdata(-r, method="average"), 1,

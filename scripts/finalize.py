@@ -40,7 +40,15 @@ sys.path.insert(0, str(ROOT))
 
 from src.readout import discover  # noqa: E402
 
+sys.path.insert(0, str(ROOT / "scripts"))
+from release_artifacts import missing_artifacts  # noqa: E402
+
 PY = sys.executable
+
+#: Output groups that never read the per-run .npz artifacts: the screening
+#: statistics (sweep_540.csv) and the tables, figures and macros, which are
+#: built from committed analysis files. Every other group needs them.
+NO_ARTIFACT_GROUPS = {0, 1}
 
 #: (output group, label, argv). Order is the manuscript's order.
 STEPS = [
@@ -140,6 +148,22 @@ def main() -> int:
     print(cov)
     if args.coverage:
         return 0
+
+    # A clone has the run records but not the .npz artifacts (gitignored, 2.2
+    # GB). The analyses would then run over whatever subset is present and
+    # overwrite the committed results with partial ones, so stop instead.
+    missing = missing_artifacts()
+    wanted = (set(args.groups) if args.groups is not None
+              else {g for g, _, _ in STEPS})
+    if missing and wanted - NO_ARTIFACT_GROUPS:
+        print(f"\n{len(missing)} run artifact files are missing, e.g.\n"
+              f"  {missing[0]}\n"
+              "Regenerating without them would overwrite committed results "
+              "with partial ones. Restore them first:\n"
+              "  python scripts/release_artifacts.py fetch\n"
+              "or run only the steps that do not need them:\n"
+              "  python scripts/finalize.py --groups 0 1")
+        return 2
 
     print("\n" + "=" * 78)
     print("REGENERATING EVIDENCE PACKAGE")

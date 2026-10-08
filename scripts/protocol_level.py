@@ -37,6 +37,10 @@ from src.readout import discover  # noqa: E402
 OUT = ROOT / "results/analysis/protocol_level"
 PROTOCOLS = ["nslkdd_v2", "kddcup99_v2", "cicids2017_v2", "ctu13_v2_f0",
              "ctu13_v2_f1"]
+#: Each axis's registered protocols. The neuron axis excludes CIC-IDS2017 (no
+#: U2R test support), so it must not pick it up just because runs exist there.
+AXIS_PROTOCOLS = {"encoding": PROTOCOLS,
+                  "neuron": [p for p in PROTOCOLS if p != "cicids2017_v2"]}
 
 
 def collect() -> pd.DataFrame:
@@ -67,7 +71,7 @@ def collect() -> pd.DataFrame:
 
 
 def analyse(df: pd.DataFrame, axis: str):
-    sub = df[df.axis == axis]
+    sub = df[(df.axis == axis) & df.protocol.isin(AXIS_PROTOCOLS[axis])]
     # One mean per (protocol, level): the protocol becomes the unit.
     per_proto = (sub.groupby(["protocol", "level"]).macro_f1.mean()
                     .unstack("level").dropna())

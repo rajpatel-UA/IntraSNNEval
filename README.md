@@ -93,7 +93,8 @@ arctangent surrogate). They are trained with Adam (lr 10⁻³, batch 128,
 │   ├── manifests/           frozen split manifests for every confirmation protocol
 │   ├── v1_submitted/        screening sweep (540 runs) and the 60 CTU-13 condition runs
 │   ├── runs*/               per-run records (results.json) and summary CSVs
-│   └── analysis/            every statistic reported in the paper, plus PROVENANCE.json
+│   ├── analysis/            every statistic reported in the paper, plus PROVENANCE.json
+│   └── ARTIFACTS.*          checksums of the run artifacts and the record of their archive
 ├── paper/                   generated figures, LaTeX tables, number macros (manuscript prose not included)
 ├── docs/DATASETS.md         dataset sources, expected layout, CTU-13 download script
 └── *.md                     pre-registration and diagnostic specifications (see below)
@@ -172,9 +173,9 @@ python scripts/make_fig_far_transfer.py     # operating-point transfer figure (F
 python scripts/make_frozen_numbers.py       # paper/sec_frozen_numbers.tex (every reported number as a macro)
 ```
 
-Without the [run artifacts](#run-artifacts), `make_frozen_numbers.py` omits the
-five confirmation-sweep Friedman macros (`\FNConf*`), which it computes from
-per-run predictions.
+None of these need the [run artifacts](#run-artifacts) or the datasets. To run
+them together with the screening statistics and the consistency checks, use
+`python scripts/finalize.py --groups 0 1`.
 
 `results/analysis/PROVENANCE.json` records the SHA-256 of every analysis
 artifact and manuscript source that the reported numbers come from.
@@ -197,12 +198,13 @@ Only the screening analysis (`rank_analysis.py`) and `rank_agreement.py` run
 from committed files alone. Every analysis of the confirmation runs reads
 per-sample predictions from the per-run `artifacts/*.npz` files (see
 [Run artifacts](#run-artifacts)), and reports "no runs" without them.
-**Do not run `finalize.py` without the artifacts.** Some of its steps would
-overwrite committed results with incomplete versions, for example the
-duplicate-free sensitivity in `results/analysis/dedup/`. If that happens,
-restore the committed files with `git checkout -- results paper`. Several steps
-also need the raw datasets: `feature_sparsity.py`, `data_request.py`,
-`support_audit.py`, and `nsl_known_unseen.py`.
+`finalize.py` therefore checks for the artifacts first and stops if any are
+missing, because some of its steps would otherwise overwrite committed results
+with incomplete versions. `--groups 0 1` limits it to the steps that do not
+need them. If committed files do get overwritten, restore them
+with `git checkout -- results paper`. Several steps also need the raw datasets:
+`feature_sparsity.py`, `data_request.py`, `support_audit.py`, and
+`nsl_known_unseen.py`.
 
 ### 3. Retrain from scratch (datasets + GPU)
 
@@ -289,6 +291,25 @@ Per-run prediction artifacts (`results/runs*/**/artifacts/*.npz`, about 2.2 GB)
 and model checkpoints (`checkpoint.pt`) are **not tracked in git** because of
 their size. Everything needed for level 1 above, and the `results.json` record
 of every run, is tracked.
+
+The artifacts are two files per run for 960 runs (the confirmation sweep and
+the post hoc arms), 1,920 files in total:
+
+- `artifacts/test_prefix.npz`: per-sample test predictions and the readout at
+  every timestep
+- `artifacts/val_scores.npz`: validation labels and scores
+
+`results/ARTIFACTS.sha256` lists the SHA-256 of every artifact file.
+`results/ARTIFACTS.json` records the archive's name, size and hash, and will
+hold its download URL and DOI once it is published.
+
+```bash
+python scripts/release_artifacts.py fetch     # download, check the hash, extract
+python scripts/release_artifacts.py verify    # check the files on disk against the list
+python scripts/release_artifacts.py build     # rebuild the archive (identical bytes from identical files)
+```
+
+The archive is not published yet, so `fetch` currently stops with a message.
 
 ## Scope
 

@@ -13,6 +13,9 @@ a silent one computed on three would not be.
 
 Emits:
   tau.json                 tau, permutation p, movers, protocols covered
+  omnibus.json             Friedman test over the same 27 x 25 confirmation
+                           blocks, so the \\FNConf* macros rebuild from committed
+                           files without the per-run artifacts
   rank_comparison.csv      per configuration: screening rank, confirmation rank
   fig_rank_shift.{pdf,png} slopegraph, screening -> confirmation
 
@@ -27,7 +30,7 @@ from pathlib import Path
 
 import numpy as np
 import pandas as pd
-from scipy.stats import kendalltau, rankdata
+from scipy.stats import friedmanchisquare, kendalltau, rankdata
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
@@ -357,6 +360,22 @@ def main() -> int:
         "biggest_losers": dn.to_dict("records"),
     }
     (OUT / "tau.json").write_text(json.dumps(payload, indent=2))
+
+    # The confirmation omnibus over the same blocks the ranking used. Saved
+    # rather than recomputed downstream: make_frozen_numbers.py used to rebuild
+    # it from the runs, and without the .npz artifacts it silently emitted no
+    # \FNConf* macros at all.
+    wide = (raw[raw.protocol.isin(protocols)]
+            .pivot_table(index=["protocol", "seed"], columns="variant",
+                         values="f1").dropna())
+    chi2, fp = friedmanchisquare(*[wide[c].to_numpy() for c in wide.columns])
+    (OUT / "omnibus.json").write_text(json.dumps({
+        "protocols_included": protocols,
+        "n_blocks": int(wide.shape[0]),
+        "n_configurations": int(wide.shape[1]),
+        "friedman_chi2": float(chi2),
+        "friedman_p": float(fp),
+    }, indent=2))
     _scr_blocks = json.load(open(ROOT / "results/analysis/v1/friedman.json"))["n_blocks"]
     slopegraph(cmp, protocols, FIG / "fig_rank_shift", tau=float(tau),
                n_screening_blocks=int(_scr_blocks))
